@@ -8,6 +8,7 @@ export default function Home() {
         <button>Submit</button>
         <h1>Yes my pipeline is working properly !!!!!!!</h1>
       </div>
+      <h2>My Pipeline !!!!!!!</h2>
     </div>
   );
 }
