@@ -1,12 +1,20 @@
 name: Deploy to staging
-on : 
-    push :
-        branches: [master]
 
-jobs: 
-    redeploy_everything:
-        runs-on: ubuntu-latest
-        name: Deploying everything to server
-        steps:
-            - run: |
-                echo "{{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  redeploy_everything:
+    runs-on: ubuntu-latest
+    name: Deploying everything to server
+    steps:
+      - name: Setup SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}"" > ~/ssh_key
+          chmod 700 ~/ssh_key
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@13.203.64.115 \
+          "cd ~/NextApp/cicd && git pull origin master && npm install && npm run build && pm2 restart next-app"
