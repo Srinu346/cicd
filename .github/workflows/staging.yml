@@ -1,0 +1,12 @@
+name: Deploy to staging
+on : 
+    push :
+        branches: [master]
+
+jobs: 
+    redeploy_everything:
+        runs-on: ubuntu-latest
+        name: Deploying everything to server
+        steps:
+            - run: |
+                echo "{{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
