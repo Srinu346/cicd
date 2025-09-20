@@ -6,6 +6,7 @@ export default function Home() {
         <input type="text" placeholder="please enter username"></input>
         <input type="password" placeholder="please enter password"></input>
         <button>Submit</button>
+        <h1>Yes my pipeline is working properly !!!!!!!</h1>
       </div>
     </div>
   );
